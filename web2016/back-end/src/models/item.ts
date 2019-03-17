@@ -5,21 +5,22 @@ export enum ITEM_TYPES {
     bid = "bid"
 }
 
-export interface Item {
+export abstract class Item {
+    id?: string; // UUID
     name: string;
     description: string;
     pictureUrls: string[];
     sellersName: string;
-    isFixedPrice: ITEM_TYPES;
+    abstract type: ITEM_TYPES;
 }
 
-export class BidItem {
-    isFixedPrice = ITEM_TYPES.bid;
+export class BidItem extends Item {
+    type = ITEM_TYPES.bid;
     highestBid: number;
     bidHistory: Bid[] = [];
 }
 
-export class FixedPriceItem {
-    isFixedPrice = ITEM_TYPES.fixedPrice;
+export class FixedPriceItem extends Item {
+    type = ITEM_TYPES.fixedPrice;
     price: number;
 }

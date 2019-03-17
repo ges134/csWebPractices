@@ -21,22 +21,20 @@ app.use(function(req, res, next) {
 
 // Parsing all request bodies into json.
 app.use(bodyParser.json());
-app.use(
-    bodyParser.urlencoded({
-        extended: true
-    })
-);
 
 app.use(function(req, res, next) {
     console.log(JSON.stringify(req.body));
     next();
 });
 
-const PORT = config.port;
-
 // Routing all queries to the api route.
 app.use("/api", apiRouter());
 
+const PORT = config.port;
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
 });
+
+// Parsing arguments passed to this program
+// TODO: Fake data when --fake args is given.
+console.log(process.argv);

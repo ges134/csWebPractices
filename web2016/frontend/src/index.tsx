@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/app/App';
 import * as serviceWorker from './serviceWorker';
-import Axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-axios.get('/example').then((response) => {
-  ReactDOM.render(<App data={response} />, document.getElementById('root'));
-});
+ReactDOM.render(<App />, document.getElementById('root'));
+
 
 
 // If you want your app to work offline and load faster, you can change

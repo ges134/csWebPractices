@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
+import ParamViewer from '../paramViewer/ParamViewer';
 import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
+interface AppProps {
+  data : string;
+}
+
+class App extends Component {  
+  props : AppProps;
+
+  constructor(props : AppProps) {
+    super(props);
+    this.props = props;
+  }
+
   render() {
     return (
       <div className="App">
@@ -20,6 +32,9 @@ class App extends Component {
             Learn React
           </a>
         </header>
+        <div className="body">
+          <ParamViewer param={this.props.data} />
+        </div>
       </div>
     );
   }

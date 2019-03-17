@@ -4,10 +4,6 @@ import { InMemoryDb } from "../db/in-memory";
 import { Item } from "../models";
 
 export function addItemRoute(request: Request, response: Response) {
-    if (!request.body) {
-        response.status(400).send("Missing item value in body.");
-    }
-
     const item: Item = request.body;
     item.id = uuid();
 

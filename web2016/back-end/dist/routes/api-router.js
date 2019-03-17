@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const add_item_1 = require("./add-item");
+const core_1 = require("../core");
+const get_items_1 = require("./get-items");
 // This is the manager for the routers of the main server.
 //
 // Basically, the server is there to render the pages and the api is there to
@@ -19,7 +21,8 @@ function apiRouter() {
         next();
     });
     // Creating the routes
-    router.post("/item/", add_item_1.addItemRoute);
+    router.get("/items", get_items_1.getItemsRoute);
+    router.post("/item", core_1.EndpointFactory.post(add_item_1.addItemRoute));
     /*
     router.route('/recipes/:id').get(getSpecificRecipe(recipesCollection, imagesFolderLocation))
                                 .post(imageManager.middleware, updateRecipe(recipesCollection))

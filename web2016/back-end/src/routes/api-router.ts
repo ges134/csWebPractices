@@ -1,5 +1,7 @@
 import express from "express";
 import { addItemRoute } from "./add-item";
+import { EndpointFactory } from "../core";
+import { getItemsRoute } from "./get-items";
 
 // This is the manager for the routers of the main server.
 //
@@ -17,7 +19,8 @@ export function apiRouter() {
     });
 
     // Creating the routes
-    router.post("/item/", addItemRoute);
+    router.get("/items", getItemsRoute);
+    router.post("/item", EndpointFactory.post(addItemRoute));
     /*
     router.route('/recipes/:id').get(getSpecificRecipe(recipesCollection, imagesFolderLocation))
                                 .post(imageManager.middleware, updateRecipe(recipesCollection))

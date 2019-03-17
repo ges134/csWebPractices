@@ -6,9 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const v4_1 = __importDefault(require("uuid/v4"));
 const in_memory_1 = require("../db/in-memory");
 function addItemRoute(request, response) {
-    if (!request.body) {
-        response.status(400).send("Missing item value in body.");
-    }
     const item = request.body;
     item.id = v4_1.default();
     in_memory_1.InMemoryDb.items[item.id] = item;

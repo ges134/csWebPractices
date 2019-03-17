@@ -1,43 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ParamViewer from '../paramViewer/ParamViewer';
 import logo from './logo.svg';
 import './App.css';
+import Layout from '../layout/Layout';
+import { Route, Switch } from 'react-router-dom';
 
-interface AppProps {
-  data : string;
-}
-
-class App extends Component {  
-  props : AppProps;
-
-  constructor(props : AppProps) {
-    super(props);
-    this.props = props;
-  }
-
-  render() {
+export default class App extends Component {
+  public render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-        <div className="body">
-          <ParamViewer param={this.props.data} />
-        </div>
-      </div>
+      <Fragment>
+        <Layout>
+          <Switch>
+            <Route exact={true} path="/" component={this.home} />
+            <Route exact={true} path="/auctions" component={this.auctions} />
+            <Route exact={true} path="/items" component={this.items} />
+            <Route exact={true} path="/purchases" component={this.purchases} />
+            <Route exact={true} path="/profile" component={this.profile} />
+            <Route exact={true} path="/logout" component={this.logout} />
+            <Route exact={true} path="/login" component={this.login} />
+            <Route exact={true} path="/signup" component={this.signup} />
+          </Switch>
+        </Layout>
+      </Fragment>
     );
   }
-}
 
-export default App;
+  private home = () => <Fragment>Home</Fragment>;
+  private auctions = () => <Fragment>Auctions</Fragment>;
+  private items = () => <Fragment>items</Fragment>;
+  private purchases = () => <Fragment>Purchases</Fragment>;
+  private profile = () => <Fragment>Profile</Fragment>;
+  private logout = () => <Fragment>Logout</Fragment>;
+  private login = () => <Fragment>Logout</Fragment>;
+  private signup = () => <Fragment>Signup</Fragment>;
+}

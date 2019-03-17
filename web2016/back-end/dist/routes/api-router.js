@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const example_1 = require("./example");
+const add_item_1 = require("./add-item");
 // This is the manager for the routers of the main server.
 //
 // Basically, the server is there to render the pages and the api is there to
@@ -15,11 +15,11 @@ const example_1 = require("./example");
 function apiRouter() {
     const router = express_1.default.Router();
     router.use(function (req, res, next) {
-        res.setHeader('Content-Type', 'application/json');
+        res.setHeader("Content-Type", "application/json");
         next();
     });
     // Creating the routes
-    router.get('/example/:param', example_1.exampleRoute);
+    router.post("/item/", add_item_1.addItemRoute);
     /*
     router.route('/recipes/:id').get(getSpecificRecipe(recipesCollection, imagesFolderLocation))
                                 .post(imageManager.middleware, updateRecipe(recipesCollection))

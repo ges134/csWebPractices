@@ -1,26 +1,22 @@
 import { Bid } from "./bid";
-
-export enum ITEM_TYPES {
+export declare enum ITEM_TYPES {
     fixedPrice = "fixedPrice",
     bid = "bid"
 }
-
-export abstract class Item {
-    id?: string; // UUID
+export declare abstract class Item {
+    id?: string;
     name: string;
     description: string;
     pictureUrls: string[];
     sellersName: string;
     abstract type: ITEM_TYPES;
 }
-
-export class BidItem extends Item {
-    type = ITEM_TYPES.bid;
+export declare class BidItem extends Item {
+    type: ITEM_TYPES;
     highestBid: number;
-    bidHistory: Bid[] = [];
+    bidHistory: Bid[];
 }
-
-export class FixedPriceItem extends Item {
-    type = ITEM_TYPES.fixedPrice;
+export declare class FixedPriceItem extends Item {
+    type: ITEM_TYPES;
     price: number;
 }

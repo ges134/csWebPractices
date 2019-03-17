@@ -1,5 +1,5 @@
 import express from "express";
-import { exampleRoute } from './example';
+import { addItemRoute } from "./add-item";
 
 // This is the manager for the routers of the main server.
 //
@@ -12,12 +12,12 @@ export function apiRouter() {
     const router = express.Router();
 
     router.use(function(req, res, next) {
-        res.setHeader('Content-Type', 'application/json');
+        res.setHeader("Content-Type", "application/json");
         next();
     });
 
     // Creating the routes
-    router.get('/example/:param', exampleRoute);
+    router.post("/item/", addItemRoute);
     /*
     router.route('/recipes/:id').get(getSpecificRecipe(recipesCollection, imagesFolderLocation))
                                 .post(imageManager.middleware, updateRecipe(recipesCollection))

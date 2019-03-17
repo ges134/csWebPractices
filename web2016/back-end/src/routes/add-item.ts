@@ -1,12 +1,17 @@
 import { Request, Response } from "express";
+import uuid from "uuid/v4";
+import { InMemoryDb } from "../db/in-memory";
+import { Item } from "../models";
 
-export function exampleRoute(request: Request, response: Response) {
-    // How to get a param from the url (ex: /api/:ip in nodejs route)
+export function addItemRoute(request: Request, response: Response) {
     if (!request.body) {
-        response.status(400).send("Missing item param in body.");
+        response.status(400).send("Missing item value in body.");
     }
 
-    const { item } = request.body;
+    const item: Item = request.body;
+    item.id = uuid();
 
-    response.status(200).send({ test: param });
+    InMemoryDb.items[item.id] = item;
+
+    response.status(200).send({ item });
 }

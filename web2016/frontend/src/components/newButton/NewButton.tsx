@@ -9,7 +9,7 @@ interface INewButtonProps {
 
 const NewButton = (props: INewButtonProps) => (
   <Fragment>
-    <Button color="primary">
+    <Button color="link">
       <Link to={props.link}>{props.text}</Link>
     </Button>
   </Fragment>

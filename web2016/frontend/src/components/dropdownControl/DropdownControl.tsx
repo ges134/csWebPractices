@@ -4,7 +4,6 @@ import { FormGroup, Label, Input, Col, FormText } from 'reactstrap';
 interface IProps {
   labelText: string;
   name: string;
-  placeholder: string;
   helperText?: string;
   onChange: (value: string, name: string) => void;
   value: string;
@@ -16,7 +15,7 @@ interface ISelectProps {
   label: string;
 }
 
-export default class InputControl extends Component<IInputControlProps, any> {
+export default class DropdownControl extends Component<IProps, any> {
   constructor(props: IProps) {
     super(props);
   }
@@ -37,7 +36,6 @@ export default class InputControl extends Component<IInputControlProps, any> {
           <Input
             name={this.props.name}
             type="select"
-            placeholder={this.props.placeholder}
             onChange={this.onChange}
             value={this.props.value}
           >

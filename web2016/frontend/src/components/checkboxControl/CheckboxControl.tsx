@@ -9,7 +9,7 @@ interface IProps {
   value: boolean;
 }
 
-export default class CheckboxControl extends Component<IInputControlProps, any> {
+export default class CheckboxControl extends Component<IProps, any> {
   constructor(props: IProps) {
     super(props);
   }
@@ -28,7 +28,7 @@ export default class CheckboxControl extends Component<IInputControlProps, any> 
             type="checkbox"
             name={this.props.name}
             onChange={this.onChange}
-            value={this.props.value}
+            checked={this.props.value}
           />{' '}
           {this.props.labelText}
         </Label>

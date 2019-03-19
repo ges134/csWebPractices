@@ -11,7 +11,9 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Container,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 interface ILayoutProps {
   children: ReactNode;
@@ -45,15 +47,19 @@ export default class Example extends React.Component<ILayoutProps, ILayoutState>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar={true}>
             <Nav className="ml-auto" navbar={true}>
+              {/* <NavItem>
+                <NavLink>
+                  <Link to="/auction">Auction house</Link>
+                </NavLink>
+              </NavItem> */}
               <NavItem>
-                <NavLink href="/">Auction house</NavLink>
+                <Link to="/items">My items</Link>
               </NavItem>
-              <NavItem>
-                <NavLink href="/">My items</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/">My purchases</NavLink>
-              </NavItem>
+              {/* <NavItem>
+                <NavLink>
+                  <Link to="/purchases">My purchases</Link>
+                </NavLink>
+              </NavItem> */}
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   User
@@ -67,6 +73,7 @@ export default class Example extends React.Component<ILayoutProps, ILayoutState>
             </Nav>
           </Collapse>
         </Navbar>
+        <Container>{this.props.children}</Container>
       </div>
     );
   }

@@ -7,7 +7,7 @@ import { FormGroup, Label, Input, Col, FormText } from 'reactstrap';
  */
 type InputType = 'email' | 'password' | 'text' | 'textarea' | 'number';
 
-interface IInputControlProps {
+export interface IInputControlProps {
   labelText: string;
   name: string;
   inputType: InputType;

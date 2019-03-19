@@ -12,7 +12,7 @@ interface IProps {
   name: string;
   description: string;
   price: string;
-  isBid: boolean;
+  type: TypeOfSale;
   onChange: (value: string, name: string) => void;
   onSubmit: () => void;
 }
@@ -28,6 +28,28 @@ const ItemForm = (props: IProps) => {
       label: 'fixed price',
     },
   ];
+
+  const duration = (
+    <InputControl
+      labelText="Duration"
+      name="duration"
+      inputType="number"
+      placeholder="Duration of the auction (in day)"
+      onChange={props.onChange}
+      value={props.price}
+    />
+  );
+  const price = (
+    <InputControl
+      labelText="Price"
+      name="price"
+      inputType="number"
+      placeholder="Price of the item"
+      onChange={props.onChange}
+      value={props.price}
+    />
+  );
+
   return (
     <>
       <InputControl
@@ -46,22 +68,15 @@ const ItemForm = (props: IProps) => {
         onChange={props.onChange}
         value={props.description}
       />
-      <InputControl
-        labelText="Price"
-        name="price"
-        inputType="number"
-        placeholder="Price of the item"
-        onChange={props.onChange}
-        value={props.price}
-      />
       <DropdownControl
         labelText="This item will be bided"
-        name="isBid"
+        name="type"
         helperText="By not ticking this, your item will be at fixed price"
         onChange={props.onChange}
-        value={props.isBid}
+        value={props.type}
         options={options}
       />
+      {props.type === TypeOfSale.bid ? duration : price}
       {/* FIXME: wrap this in component */}
       <Button color="primary" onClick={props.onSubmit}>
         Send

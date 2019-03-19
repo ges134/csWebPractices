@@ -13,6 +13,7 @@ interface IProps {
   description: string;
   price: string;
   type: TypeOfSale;
+  duration: string;
   onChange: (value: string, name: string) => void;
   onSubmit: () => void;
 }
@@ -36,7 +37,7 @@ const ItemForm = (props: IProps) => {
       inputType="number"
       placeholder="Duration of the auction (in day)"
       onChange={props.onChange}
-      value={props.price}
+      value={props.duration}
     />
   );
   const price = (

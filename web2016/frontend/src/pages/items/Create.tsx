@@ -35,11 +35,21 @@ export default class Create extends Component<any, IState> {
   };
 
   public onSubmit = () => {
-    axios.post('http://localhost:4200/api/', { ...this.stateWithoutSuccess() }).then(() => {
-      this.setState({
-        isSuccess: true,
+    axios
+      .post(
+        'http://localhost:4200/api/item',
+        { ...this.stateWithoutSuccess(), seller: 'a@a.a' },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      .then(() => {
+        this.setState({
+          isSuccess: true,
+        });
       });
-    });
   };
 
   public render() {

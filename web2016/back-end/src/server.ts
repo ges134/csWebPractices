@@ -37,4 +37,4 @@ app.listen(PORT, () => {
 
 // Parsing arguments passed to this program
 // TODO: Fake data when --fake args is given.
-console.log(process.argv);
+// console.log(process.argv);

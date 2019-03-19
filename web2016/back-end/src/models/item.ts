@@ -11,6 +11,7 @@ export abstract class Item {
     description: string;
     pictureUrls: string[];
     sellersName: string;
+    startDate: Date;
     abstract type: ITEM_TYPES;
 }
 
@@ -18,6 +19,7 @@ export class BidItem extends Item {
     type = ITEM_TYPES.bid;
     highestBid: number;
     bidHistory: Bid[] = [];
+    duration: number;
 }
 
 export class FixedPriceItem extends Item {

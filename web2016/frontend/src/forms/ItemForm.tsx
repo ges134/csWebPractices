@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import InputControl from '../components/inputControl/InputControl';
 import DropdownControl from '../components/dropdownControl/DropdownControl';
 import Button from 'reactstrap/lib/Button';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Label } from 'reactstrap';
+import * as Yup from 'yup';
+import FormGroup from 'reactstrap/lib/FormGroup';
 
 export enum TypeOfSale {
   bid = 'bid',
@@ -18,72 +22,58 @@ interface IProps {
   onSubmit: () => void;
 }
 
-const ItemForm = (props: IProps) => {
-  const options = [
-    {
-      value: TypeOfSale.bid,
-      label: 'bid',
-    },
-    {
-      value: TypeOfSale.fixed,
-      label: 'fixed price',
-    },
-  ];
+export default class ItemForm extends Component<IProps, any> {
+  public render() {
+    const duration = (
+      <>
+        <Label for="duration">Duration of auction</Label>
+        <Field name="duration" type="number" component={InputControl} />
+      </>
+    );
 
-  const duration = (
-    <InputControl
-      labelText="Duration"
-      name="duration"
-      inputType="number"
-      placeholder="Duration of the auction (in day)"
-      onChange={props.onChange}
-      value={props.duration}
-    />
-  );
-  const price = (
-    <InputControl
-      labelText="Price"
-      name="price"
-      inputType="number"
-      placeholder="Price of the item"
-      onChange={props.onChange}
-      value={props.price}
-    />
-  );
+    const price = (
+      <>
+        <Label for="price">Type of transaction</Label>
+        <Field name="price" type="number" component={InputControl} />
+      </>
+    );
 
-  return (
-    <>
-      <InputControl
-        labelText="Name"
-        name="name"
-        inputType="text"
-        placeholder="Name of the item"
-        onChange={props.onChange}
-        value={props.name}
-      />
-      <InputControl
-        labelText="Description"
-        name="description"
-        inputType="textarea"
-        placeholder="Description"
-        onChange={props.onChange}
-        value={props.description}
-      />
-      <DropdownControl
-        labelText="This item will be bided"
-        name="type"
-        helperText="By not ticking this, your item will be at fixed price"
-        onChange={props.onChange}
-        value={props.type}
-        options={options}
-      />
-      {props.type === TypeOfSale.bid ? duration : price}
-      {/* FIXME: wrap this in component */}
-      <Button color="primary" onClick={props.onSubmit}>
-        Send
-      </Button>
-    </>
-  );
-};
+    const { onChange, onSubmit, children, ...formValues } = this.props;
 
-export default ItemForm;
+    const validate = Yup.object().shape({
+      name: Yup.string().required('this field is required'),
+      description: Yup.string().required('this field is required'),
+      type: Yup.mixed()
+        .oneOf([TypeOfSale.bid, TypeOfSale.fixed])
+        .required('this field is required'),
+      duration: Yup.number(),
+      price: Yup.number(),
+    });
+
+    return (
+      <Formik initialValues={formValues} validationSchema={validate} onSubmit={this.props.onSubmit}>
+        <Form>
+          <FormGroup>
+            <Label for="name">Name of the item</Label>
+            <Field name="name" type="text" component={InputControl} />
+          </FormGroup>
+          <FormGroup>
+            <Label for="description">Description</Label>
+            <Field name="description" type="text" component={InputControl} />
+          </FormGroup>
+          <FormGroup>
+            <Label for="type">Type of transaction</Label>
+            <Field name="type" type="select" component={InputControl}>
+              <option value={TypeOfSale.bid}>Bid</option>
+              <option value={TypeOfSale.fixed}>Fixed price</option>
+            </Field>
+          </FormGroup>
+          {this.props.type === TypeOfSale.bid ? duration : price}
+          <Button color="primary" type="submit" className="mt-3">
+            Send
+          </Button>
+        </Form>
+      </Formik>
+    );
+  }
+}

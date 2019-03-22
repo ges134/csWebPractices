@@ -9,7 +9,7 @@ import Items from '../../pages/items/Items';
 export default class App extends Component {
   public render() {
     return (
-      <Fragment>
+      <>
         <Layout>
           <Switch>
             <Route exact={true} path="/" component={this.home} />
@@ -23,7 +23,7 @@ export default class App extends Component {
             <Route path="*" component={this.notFound} />
           </Switch>
         </Layout>
-      </Fragment>
+      </>
     );
   }
 
